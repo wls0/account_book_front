@@ -1,32 +1,111 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+  <v-app id="inspire">
+    <div>
+      <v-app-bar
+        color="#673ab7"
+        dark
+      >
+        <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
+        <v-toolbar-title>가계부</v-toolbar-title>
+      </v-app-bar>
+
+      <v-navigation-drawer
+        v-model="drawer"
+        absolute
+        temporary
+      >
+        <v-list
+          nav
+          dense
+        >
+          <v-list-item-group
+            v-model="group"
+            active-class="deep-purple--text text--accent-4"
+          >
+
+            <v-list-item router-link to="/login">
+              <v-list-item-icon>
+                <i class="fas fa-user-alt"></i>
+              </v-list-item-icon>
+
+              <v-list-item-title v-if="login === false">로그인</v-list-item-title>
+              <v-list-item-title v-else @click="logout()">로그아웃</v-list-item-title>
+            </v-list-item>
+
+            <v-list-item
+             v-show="login"
+             router-link :to="{ name:'month', params:{ month : this.month }}">
+              <v-list-item-icon>
+                <i class="fas fa-home"></i>
+              </v-list-item-icon>
+              <v-list-item-title>월 화면</v-list-item-title>
+            </v-list-item>
+
+            <v-list-item
+            v-show="login"
+             router-link :to="{ name:'year', params:{ year : this.year }}">
+              <v-list-item-icon>
+               <i class="far fa-file-alt"></i>
+              </v-list-item-icon>
+              <v-list-item-title  >년 가계부</v-list-item-title>
+            </v-list-item>
+
+            <v-list-item
+            v-show="login"
+             router-link :to="{ name:'write'}">
+              <v-list-item-icon>
+               <i class="fas fa-file-signature" id="fix_plus"></i>
+              </v-list-item-icon>
+              <v-list-item-title>가계부 작성</v-list-item-title>
+            </v-list-item>
+
+          </v-list-item-group>
+        </v-list>
+      </v-navigation-drawer>
+      <router-view/>
     </div>
-    <router-view/>
-  </div>
+  </v-app>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<script>
+import dayjs from 'dayjs'
+export default {
+  data: () => ({
+    drawer: false,
+    group: null,
+    month: '',
+    year: ''
+  }),
+  created () {
+    this.month = dayjs(new Date()).format('YYYY-MM')
+    this.year = dayjs(new Date()).format('YYYY')
+  },
+  computed: {
+    login () {
+      return this.$store.getters.isLogin
+    }
+  },
+  methods: {
+    logout () {
+      console.log('hi?')
+      this.$store.dispatch('LOGOUT')
+    }
+  }
 }
-
-#nav {
-  padding: 30px;
+</script>
+<style scoped>
+.far {
+  margin-top: 3px;
+  margin-left: 5px;
 }
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+.fa, .fas {
+    font-family: "Font Awesome 5 Pro";
+    font-weight: 900;
+    margin-top: 3px;
+    margin-left: 2px;
 }
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+#fix_plus{
+  font-weight: 400;
+  margin-left: 5px;
 }
 </style>
