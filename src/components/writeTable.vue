@@ -25,7 +25,7 @@
           <td>{{ item.bigCategory }}</td>
           <td>{{ item.cardName }}</td>
           <td>{{ item.sort }}</td>
-          <td>{{ item.price }}</td>
+          <td>{{ item.cost }}</td>
         </tr>
       </tbody>
     </template>

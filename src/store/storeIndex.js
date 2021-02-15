@@ -23,6 +23,7 @@ export default new Vuex.Store({
     cash: 0,
     costList: [],
     addAccountList: [],
+    accountList: [],
     hyundai: 0,
     kb: 0,
     lotte: 0,

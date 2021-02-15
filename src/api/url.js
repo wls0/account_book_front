@@ -24,10 +24,23 @@ function write (data) {
     return err.response
   })
 }
+function edit (data) {
+  return instanceAuth.put('/account', data, { credentials: true }).catch(err => {
+    return err.response
+  })
+}
+function deleteAccount (id) {
+  console.log(id)
+  return instanceAuth.delete(`/account/${id}`, { credentials: true }).catch(err => {
+    return err.response
+  })
+}
 export {
   login,
   monthCost,
   yearCost,
   dayCost,
-  write
+  write,
+  edit,
+  deleteAccount
 }

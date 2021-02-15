@@ -60,6 +60,7 @@ const SET_YEAR_COST = (state, result) => {
 const SET_DAY_COST = (state, result) => {
   if (result.statusText === 'OK') {
     console.log(result.data)
+    // state.dayAccount = result.data.list
     state.cash = result.data.cash
     state.hyundai = result.data.hyundai
     state.kb = result.data.kb
@@ -69,6 +70,7 @@ const SET_DAY_COST = (state, result) => {
     state.total = result.data.total
     state.woori = result.data.woori
     state.revenue = result.data.revenue
+    state.accountList = result.data.list
     state.addAccountList = []
   } else {
     console.log(result)
@@ -76,7 +78,12 @@ const SET_DAY_COST = (state, result) => {
   }
 }
 const SET_WRITE = (state, result) => {
-// ok 확인
+  if (result.statusText === 'OK') {
+    console.log('good')
+  } else {
+    console.log(result)
+    error(state, result.data)
+  }
 }
 const SET_WRITE_TABLE = (state, result) => {
   const list = state.addAccountList

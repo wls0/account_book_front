@@ -9,7 +9,7 @@
     <div class="blank"/>
     <v-layout>
       <v-flex>
-        <v-sheet height="500">
+        <v-sheet height="600">
           <v-calendar
             :now="today"
             :value="today"
@@ -106,14 +106,16 @@ export default {
       const beforMonth = new Date(this.$route.params.month).getMonth() + 1
       let year
       let month
-      if (beforMonth > 13) {
+      if (beforMonth >= 12) {
         year = beforYear + 1
         month = '01'
       } else {
-        year = beforYear
         month = beforMonth + 1
+        year = beforYear
       }
       const date = dayjs(year + '-' + month).format('YYYY-MM')
+      const day = new Date().getDate()
+      this.today = date + '-' + day
       this.month = month
       this.$store.dispatch('MOVE_MONTH', date)
     },
@@ -130,6 +132,8 @@ export default {
         month = beforMonth
       }
       const date = dayjs(year + '-' + month).format('YYYY-MM')
+      const day = new Date().getDate()
+      this.today = date + '-' + day
       this.month = month
       this.$store.dispatch('MOVE_MONTH', date)
     },

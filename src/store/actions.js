@@ -3,7 +3,9 @@ import {
   monthCost,
   yearCost,
   dayCost,
-  write
+  write,
+  edit,
+  deleteAccount
 } from '../api/url'
 import { deleteCookie, tokenSaveCookie } from '../util/cookie'
 import { router } from '../router/router'
@@ -38,7 +40,6 @@ const MOVE_YEAR = async ({ commit }, date) => {
 }
 const DAY = async ({ commit }, date) => {
   const data = await dayCost(date)
-  console.log(data)
   router.push({ name: 'day', params: { day: date } })
   await commit('SET_DAY_COST', data)
 }
@@ -48,9 +49,19 @@ const MOVE_DAY = async ({ commit }, date) => {
   router.push({ name: 'day', params: { day: date } })
 }
 const WRITE = async ({ commit }, data) => {
-  await commit('SET_WRITE_TABLE', data)
   const result = await write(data)
-  commit('SET_WRITE', result)
+  await commit('SET_WRITE', result)
+  commit('SET_WRITE_TABLE', data)
+}
+const EDIT = async ({ commit }, data) => {
+  await edit(data)
+  location.href = process.env.VUE_APP_API_URL + `/day/${data.date}`
+}
+const DELETE = async ({ commit }, data) => {
+  console.log(data)
+  await deleteAccount(data.id)
+  location.href = process.env.VUE_APP_API_URL + `/day/${data.date}`
+  // router.push({ name: 'month', params: { month: data.month } })
 }
 export {
   LOGIN,
@@ -61,6 +72,7 @@ export {
   MOVE_YEAR,
   DAY,
   MOVE_DAY,
-  WRITE
-
+  WRITE,
+  EDIT,
+  DELETE
 }

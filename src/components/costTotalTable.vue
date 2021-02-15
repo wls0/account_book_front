@@ -16,7 +16,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr :class="{'account_none':cash === 0}">
             <td>
               현금
             </td>
@@ -24,15 +24,15 @@
               {{cash}}
             </td>
           </tr>
-          <tr>
-            <td>
+          <tr :class="{'account_none':hyundai === 0}">
+            <td >
               현대
             </td>
             <td>
               {{hyundai}}
             </td>
           </tr>
-          <tr>
+          <tr :class="{'account_none':kb === 0}">
             <td>
               KB
             </td>
@@ -40,7 +40,7 @@
               {{kb}}
             </td>
           </tr>
-          <tr>
+          <tr :class="{'account_none':lotte === 0}">
             <td>
               롯데
             </td>
@@ -48,7 +48,7 @@
               {{lotte}}
             </td>
           </tr>
-          <tr>
+          <tr :class="{'account_none':samsung === 0}">
             <td>
               삼성
             </td>
@@ -56,7 +56,7 @@
               {{samsung}}
             </td>
           </tr>
-          <tr>
+          <tr :class="{'account_none':shinhan === 0}">
             <td>
               신한
             </td>
@@ -64,7 +64,7 @@
               {{shinhan}}
             </td>
           </tr>
-          <tr>
+          <tr :class="{'account_none':woori === 0}">
             <td>
               우리
             </td>
@@ -131,5 +131,8 @@ export default {
 <style scoped>
 .blank{
   margin-top: 10px;
+}
+.account_none{
+  display: none;
 }
 </style>
