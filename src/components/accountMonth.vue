@@ -13,6 +13,7 @@
           <v-calendar
             :now="today"
             :value="today"
+            @click:date="moveRight"
             color="primary"
           >
             <template v-slot:day="{ date }">
@@ -139,6 +140,9 @@ export default {
     },
     dayCost (date) {
       this.$store.dispatch('DAY', date)
+    },
+    moveRight () {
+      console.log('hi?')
     }
   }
 }
