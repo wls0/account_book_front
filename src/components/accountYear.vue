@@ -1,9 +1,15 @@
 <template>
   <div id="blank">
-    <a class="lest_month" @click="lestYear"><i class="fas fa-arrow-left"></i></a>
-    <span id="year">{{this.year}}</span>
-    <a class="next_month" @click="nextYear"><i class="fas fa-arrow-right"></i></a>
-    <Table/>
+    <a
+      class="lest_month"
+      @click="lestYear"
+    ><i class="fas fa-arrow-left" /></a>
+    <span id="year">{{ year }}</span>
+    <a
+      class="next_month"
+      @click="nextYear"
+    ><i class="fas fa-arrow-right" /></a>
+    <Table />
   </div>
 </template>
 
@@ -25,6 +31,7 @@ export default {
       const year = Number(this.$route.params.year) + 1
       this.year = year
       this.$store.dispatch('MOVE_YEAR', year)
+      console.log('???')
     },
     lestYear () {
       const year = Number(this.$route.params.year) - 1

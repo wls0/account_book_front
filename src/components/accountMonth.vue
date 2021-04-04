@@ -1,20 +1,26 @@
 <template>
   <v-container>
-    <div class="blank"/>
+    <div class="blank" />
     <v-layout>
-     <a class="lest_month" @click="lestMonth"><i class="fas fa-arrow-left"></i></a>
-      <span id="month">{{this.month}}월</span>
-      <a class="next_month" @click="nextMonth"><i class="fas fa-arrow-right"></i></a>
+      <a
+        class="lest_month"
+        @click="lestMonth"
+      ><i class="fas fa-arrow-left" /></a>
+      <span id="month">{{ month }}월</span>
+      <a
+        class="next_month"
+        @click="nextMonth"
+      ><i class="fas fa-arrow-right" /></a>
     </v-layout>
-    <div class="blank"/>
+    <div class="blank" />
     <v-layout>
       <v-flex>
         <v-sheet height="600">
           <v-calendar
             :now="today"
             :value="today"
-            @click:date="moveRight"
             color="primary"
+            @click:date="moveRight"
           >
             <template v-slot:day="{ date }">
               <template v-for="event in eventsMap[date]">
@@ -31,14 +37,14 @@
                       class="my-event"
                       v-on="on"
                       v-html="event.cost"
-                    ></div>
+                    />
                     <div
                       v-if="!event.time"
                       v-ripple
                       class="my-event2"
                       v-on="on"
                       v-html="event.revenue"
-                    ></div>
+                    />
                   </template>
                   <v-card
                     color="grey lighten-4"
@@ -48,14 +54,17 @@
                     <v-toolbar
                       color="#039f33ba"
                       dark
-                      @click="dayCost(event.date)"
                     >
-                      <v-toolbar-title v-html="event.date"></v-toolbar-title>
-                      <v-spacer></v-spacer>
+                      <v-toolbar-title v-html="event.date" />
+                      <v-spacer />
                     </v-toolbar>
-                      <div class="blank"></div>
-                      <p class="date_cost">총 지출: {{ event.cost }}</p>
-                      <p class="date_cost">총 수익: {{ event.revenue }} </p>
+                    <div class="blank" />
+                    <p class="date_cost">
+                      총 지출: {{ event.cost }}
+                    </p>
+                    <p class="date_cost">
+                      총 수익: {{ event.revenue }}
+                    </p>
                     <v-card-actions>
                       <v-btn color="secondary">
                         닫기
@@ -69,7 +78,7 @@
         </v-sheet>
       </v-flex>
     </v-layout>
-    <Table/>
+    <Table />
   </v-container>
 </template>
 
@@ -82,7 +91,8 @@ export default {
   },
   data: () => ({
     today: dayjs(new Date()).format('YYYY-MM-DD'),
-    month: ''
+    month: '',
+    date: ''
   }),
   computed: {
     costList () {
@@ -90,7 +100,7 @@ export default {
     },
     eventsMap () {
       const map = {}
-      this.costList.forEach(e => (map[e.date] = map[e.date] || []).push(e))
+      this.costList.forEach((e) => (map[e.date] = map[e.date] || []).push(e))
       return map
     }
   },
@@ -138,62 +148,63 @@ export default {
       this.month = month
       this.$store.dispatch('MOVE_MONTH', date)
     },
-    dayCost (date) {
-      this.$store.dispatch('DAY', date)
-    },
-    moveRight () {
-      console.log('hi?')
+    // dayCost (date) {
+    //   this.$store.dispatch('DAY', date)
+    // },
+    moveRight (date) {
+      this.$store.dispatch('DAY', date.date)
+      // console.log(date.date)
     }
   }
 }
 </script>
 
 <style scoped>
-  .my-event {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    border-radius: 2px;
-    background-color: #673ab7;
-    color: #ffffff;
-    border: 1px solid #673ab7;
-    width: 100%;
-    font-size: 8px;
-    padding: 3px;
-    cursor: pointer;
-    margin-bottom: 1px;
-  }
-  .my-event2 {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    border-radius: 2px;
-    background-color: #fac517;
-    color: #ffffff;
-    border: 1px solid #fac517;
-    width: 100%;
-    font-size: 8px;
-    padding: 3px;
-    cursor: pointer;
-    margin-bottom: 1px;
-  }
-  #month{
-    font-weight: bold;
-    font-size: 16px;
-  }
-  .blank{
-    margin-bottom: 10px;
-  }
-  .date_cost{
-    margin-left: 6px;
-  }
-  .v-application a{
-    color: #673ab7;
-  }
- .lest_month{
-    margin-right: 10px;
-  }
-  .next_month{
-    margin-left: 10px;
-  }
+.my-event {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-radius: 2px;
+  background-color: #673ab7;
+  color: #ffffff;
+  border: 1px solid #673ab7;
+  width: 100%;
+  font-size: 8px;
+  padding: 3px;
+  cursor: pointer;
+  margin-bottom: 1px;
+}
+.my-event2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-radius: 2px;
+  background-color: #fac517;
+  color: #ffffff;
+  border: 1px solid #fac517;
+  width: 100%;
+  font-size: 8px;
+  padding: 3px;
+  cursor: pointer;
+  margin-bottom: 1px;
+}
+#month {
+  font-weight: bold;
+  font-size: 16px;
+}
+.blank {
+  margin-bottom: 10px;
+}
+.date_cost {
+  margin-left: 6px;
+}
+.v-application a {
+  color: #673ab7;
+}
+.lest_month {
+  margin-right: 10px;
+}
+.next_month {
+  margin-left: 10px;
+}
 </style>

@@ -12,7 +12,7 @@ import { router } from '../router/router'
 
 const LOGIN = async ({ commit }, userForm) => {
   const data = await login(userForm)
-  tokenSaveCookie(data.data.access_token)
+  tokenSaveCookie(data.data.token.access_token)
   commit('SET_LOGIN', data)
 }
 const LOGOUT = ({ commit }) => {

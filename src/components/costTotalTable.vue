@@ -1,8 +1,8 @@
 <template>
   <div class="blank">
-  <h4>
-    총 지출 내역
-  </h4>
+    <h4>
+      총 지출 내역
+    </h4>
     <v-simple-table>
       <template v-slot:default>
         <thead>
@@ -21,15 +21,15 @@
               현금
             </td>
             <td>
-              {{cash}}
+              {{ cash }}
             </td>
           </tr>
           <tr :class="{'account_none':hyundai === 0}">
-            <td >
+            <td>
               현대
             </td>
             <td>
-              {{hyundai}}
+              {{ hyundai }}
             </td>
           </tr>
           <tr :class="{'account_none':kb === 0}">
@@ -37,7 +37,7 @@
               KB
             </td>
             <td>
-              {{kb}}
+              {{ kb }}
             </td>
           </tr>
           <tr :class="{'account_none':lotte === 0}">
@@ -45,7 +45,7 @@
               롯데
             </td>
             <td>
-              {{lotte}}
+              {{ lotte }}
             </td>
           </tr>
           <tr :class="{'account_none':samsung === 0}">
@@ -53,7 +53,7 @@
               삼성
             </td>
             <td>
-              {{samsung}}
+              {{ samsung }}
             </td>
           </tr>
           <tr :class="{'account_none':shinhan === 0}">
@@ -61,7 +61,7 @@
               신한
             </td>
             <td>
-              {{shinhan}}
+              {{ shinhan }}
             </td>
           </tr>
           <tr :class="{'account_none':woori === 0}">
@@ -69,7 +69,7 @@
               우리
             </td>
             <td>
-              {{woori}}
+              {{ woori }}
             </td>
           </tr>
           <tr>
@@ -77,7 +77,7 @@
               총 지출
             </td>
             <td>
-              {{total}}
+              {{ total }}
             </td>
           </tr>
           <tr>
@@ -85,7 +85,7 @@
               총 수익
             </td>
             <td>
-              {{revenue}}
+              {{ revenue }}
             </td>
           </tr>
         </tbody>

@@ -1,96 +1,96 @@
 <template>
   <v-container>
     <v-row
-    justify="center"
+      justify="center"
     >
       <v-col
-      sm="12"
+        sm="12"
       >
         <form @submit.prevent="writeAccount">
           <v-text-field
-            label="날짜"
+            v-if="save === true"
             v-model="date"
+            label="날짜"
             placeholder="ex)20210215"
             outlined
             dense
-            v-if="this.save === true"
-          ></v-text-field>
+          />
           <v-text-field
-            label="날짜"
+            v-else
             v-model="date"
+            label="날짜"
             disabled
             outlined
             dense
-            v-else
-          ></v-text-field>
+          />
           <v-text-field
-            label="사용내역"
             v-model="bigCategory"
+            label="사용내역"
             outlined
             dense
-          ></v-text-field>
+          />
           <v-text-field
-            label="상세내역"
             v-model="smallCategory"
+            label="상세내역"
             outlined
             dense
-          ></v-text-field>
+          />
           <v-row>
             <v-col
-            sm="6"
-            >
-            <v-checkbox
-              v-model="costCheck"
-              label="지출"
-              @click="checkBox('cost')"
-            ></v-checkbox>
-            </v-col>
-            <v-col
-            sm="6"
+              sm="6"
             >
               <v-checkbox
-              v-model="revenueCheck"
-              label="수익"
-              @click="checkBox('revenue')"
-              ></v-checkbox>
+                v-model="costCheck"
+                label="지출"
+                @click="checkBox('cost')"
+              />
+            </v-col>
+            <v-col
+              sm="6"
+            >
+              <v-checkbox
+                v-model="revenueCheck"
+                label="수익"
+                @click="checkBox('revenue')"
+              />
             </v-col>
           </v-row>
-           <v-select
-          v-if="revenueCheck ===false"
+          <v-select
+            v-if="revenueCheck ===false"
             v-model="card"
             :items="items"
             label="카드"
           />
           <v-select
-          v-else
+            v-else
             v-model="card"
             :items="items"
             label="카드"
             disabled
           />
           <v-text-field
-            label="금액"
             v-model="cost"
+            label="금액"
             placeholder="ex)50000"
 
             outlined
             dense
-          ></v-text-field>
+          />
           <v-btn
-          block
-          class="login_btn"
-          color="#673ab7"
-          sm="12"
-          @click="writeAccount"
+            block
+            class="login_btn"
+            color="#673ab7"
+            sm="12"
+            @click="writeAccount"
           >
             저장
           </v-btn>
         </form>
-        <div class="blank"></div>
+        <div class="blank" />
         <Table v-show="list.length > 0" />
       </v-col>
     </v-row>
-    <error></error>
+    <error />
   </v-container>
 </template>
 
