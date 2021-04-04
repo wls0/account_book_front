@@ -55,7 +55,6 @@ export default {
       const beforYear = new Date(this.$route.params.day).getFullYear()
       const beforMonth = new Date(this.$route.params.day).getMonth()
       const beforDay = new Date(this.$route.params.day).getDate() - 1
-      console.log(beforYear, beforMonth, beforDay)
       let year
       let month
       let day
