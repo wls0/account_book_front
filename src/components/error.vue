@@ -6,6 +6,7 @@
           <v-col cols="auto">
             <v-dialog
               v-model="error"
+              persistent
               transition="dialog-top-transition"
               max-width="600"
               height="300"

@@ -18,6 +18,7 @@ export default new Vuex.Store({
     })],
   state: {
     token: getAuthCookie(),
+    idCheck: true,
     msg: '',
     msgModal: false,
     cash: 0,

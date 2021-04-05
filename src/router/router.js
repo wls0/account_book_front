@@ -17,6 +17,11 @@ const router = new VueRouter({
       component: () => import('../views/loginPageView')
     },
     {
+      path: '/signup',
+      name: 'signup',
+      component: () => import('../views/signupPageView')
+    },
+    {
       path: '/day/:day',
       name: 'day',
       component: () => import('../views/accountDayView'),

@@ -17,6 +17,21 @@ const SET_LOGIN = async (state, result) => {
     error(state, result.data)
   }
 }
+const SET_FIND_ID = async (state, result) => {
+  if (result.status === 200) {
+    state.idCheck = false
+  } else {
+    error(state, result.data.data)
+  }
+}
+const SET_SIGN_UP = async (state, result) => {
+  if (result.status === 200) {
+    state.idCheck = false
+    location.href = process.env.VUE_APP_API_URL + '/login'
+  } else {
+    error(state, result.data.data)
+  }
+}
 const SET_LOGOUT = (state) => {
   state.token = ''
 }
@@ -78,10 +93,7 @@ const SET_DAY_COST = (state, result) => {
   }
 }
 const SET_WRITE = (state, result) => {
-  if (result.statusText === 'OK') {
-    console.log('good')
-  } else {
-    console.log(result)
+  if (result.statusText !== 'OK') {
     error(state, result.data)
   }
 }
@@ -91,6 +103,8 @@ const SET_WRITE_TABLE = (state, result) => {
 }
 export {
   SET_LOGIN,
+  SET_FIND_ID,
+  SET_SIGN_UP,
   SET_LOGOUT,
   SET_MONTH_COST,
   SET_YEAR_COST,

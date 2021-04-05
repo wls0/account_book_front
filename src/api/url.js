@@ -4,6 +4,16 @@ function login (data) {
     return err.response
   })
 }
+function findId (data) {
+  return instance.get(`/user/${data}`, { credentials: true }).catch(err => {
+    return err.response
+  })
+}
+function signup (data) {
+  return instance.post('/user/signup', data, { credentials: true }).catch(err => {
+    return err.response
+  })
+}
 function monthCost (date) {
   return instanceAuth.get(`/account/month/${date}`, { credentials: true }).catch(err => {
     return err.response
@@ -37,6 +47,8 @@ function deleteAccount (id) {
 }
 export {
   login,
+  findId,
+  signup,
   monthCost,
   yearCost,
   dayCost,

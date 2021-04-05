@@ -104,7 +104,6 @@ export default {
   },
   methods: {
     logout () {
-      console.log('hi?')
       this.$store.dispatch('LOGOUT')
     }
   }

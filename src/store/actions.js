@@ -1,5 +1,7 @@
 import {
   login,
+  findId,
+  signup,
   monthCost,
   yearCost,
   dayCost,
@@ -15,27 +17,38 @@ const LOGIN = async ({ commit }, userForm) => {
   tokenSaveCookie(data.data.token.access_token)
   commit('SET_LOGIN', data)
 }
-const LOGOUT = ({ commit }) => {
+const FIND_ID = async ({ commit }, id) => {
+  const data = await findId(id)
+  await commit('SET_FIND_ID', data)
+}
+const SIGN_UP = async ({ commit }, box) => {
+  const data = await signup(box)
+  await commit('SET_SIGN_UP', data)
+}
+const MOVE_SIGNUP_PAGE = async ({ commit }) => {
+  router.push({ name: 'signup' })
+}
+const LOGOUT = async ({ commit }) => {
   deleteCookie('user')
-  commit('SET_LOGOUT')
+  await commit('SET_LOGOUT')
   location.href = process.env.VUE_APP_API_URL + '/login'
 }
 const MONTH = async ({ commit }, date) => {
   const data = await monthCost(date)
-  commit('SET_MONTH_COST', data)
+  await commit('SET_MONTH_COST', data)
 }
 const MOVE_MONTH = async ({ commit }, date) => {
   const data = await monthCost(date)
-  commit('SET_MONTH_COST', data)
+  await commit('SET_MONTH_COST', data)
   router.push({ name: 'month', params: { month: date } })
 }
 const YEAR = async ({ commit }, date) => {
   const data = await yearCost(date)
-  commit('SET_YEAR_COST', data)
+  await commit('SET_YEAR_COST', data)
 }
 const MOVE_YEAR = async ({ commit }, date) => {
   const data = await yearCost(date)
-  commit('SET_YEAR_COST', data)
+  await commit('SET_YEAR_COST', data)
   router.push({ name: 'year', params: { year: date } })
 }
 const DAY = async ({ commit }, date) => {
@@ -45,7 +58,7 @@ const DAY = async ({ commit }, date) => {
 }
 const MOVE_DAY = async ({ commit }, date) => {
   const data = await dayCost(date)
-  commit('SET_DAY_COST', data)
+  await commit('SET_DAY_COST', data)
   router.push({ name: 'day', params: { day: date } })
 }
 const WRITE = async ({ commit }, data) => {
@@ -58,13 +71,14 @@ const EDIT = async ({ commit }, data) => {
   location.href = process.env.VUE_APP_API_URL + `/day/${data.date}`
 }
 const DELETE = async ({ commit }, data) => {
-  console.log(data)
   await deleteAccount(data.id)
   location.href = process.env.VUE_APP_API_URL + `/day/${data.date}`
   // router.push({ name: 'month', params: { month: data.month } })
 }
 export {
   LOGIN,
+  FIND_ID,
+  SIGN_UP,
   LOGOUT,
   MONTH,
   MOVE_MONTH,
@@ -74,5 +88,6 @@ export {
   MOVE_DAY,
   WRITE,
   EDIT,
-  DELETE
+  DELETE,
+  MOVE_SIGNUP_PAGE
 }
